@@ -1,0 +1,98 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #15142b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+h1{
+    color: rgb(199, 191, 215);
+}
+
+.form-create{
+    background-color: rgba(55, 41, 145, 0.2);
+    padding: 50px;
+    border-radius: 10px;
+    margin: 5px 0px ;
+    align-items: center;
+}
+
+label{
+    display: block;
+    width: auto;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 3px 5px;
+    margin-top: auto;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    color: white;
+}
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(199, 191, 215);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: auto;
+    
+}
+
+.button-create{
+    background-color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50%;
+}
+.custom-link{
+    color: rgb(200, 192, 216);
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.custom-link:hover{
+    color: rgb(158, 52, 114);
+}
+/*Tirar os pontinhos das listas*/
+li{
+    list-style-type: none;
+    margin: 10px 0;
+}
+/*Estilizar os links das listas*/
+li a{
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    
+}
+/*Cor do texto ao passar o mouse*/
+li a:hover{
+    color: rgb(106, 66, 170);
+}
+
+p{
+    color: #ccc;
+    font: 1.5em sans-serif;
+}
+
+.button-show {
+    padding: 10px 20px;
+    color: white;
+    background-color:#4f85b8;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin: 10px 0;
+    cursor: pointer;
+    
+}
+    
+
