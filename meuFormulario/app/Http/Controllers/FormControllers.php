@@ -79,15 +79,16 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
         $user = User:: findOrFail($id);
         if(!$user) {
             return redirect()->route('users.index')->with('success', 'Senha atualizada.');
+            
         }
-        return view('users.editpass', compact('user'));
+            return view('users.editpass', compact('user'));
     }
 
     //Update senha:
     public function updatepass(Request $request, $id){
         request() -> validate([
-            'current_pass' => 'required',
-            'new_pass' => 'required|min:3',
+            'current_pass' => ['required'],
+            'new_pass' => ['required|min:3'],
         ]);
     $user = User::findOrFail($id);
 
