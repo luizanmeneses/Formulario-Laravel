@@ -80,7 +80,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
         if(!$user) {
             return redirect()->route('users.index')->with('success', 'Senha atualizada.');
         }
-        return view('user.edit', compact('user'));
+        return view('users.editpass', compact('user'));
     }
 
     //Update senha:

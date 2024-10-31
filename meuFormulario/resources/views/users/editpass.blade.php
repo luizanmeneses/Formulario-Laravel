@@ -1,7 +1,7 @@
 <x-layout title="Editar senha">
     <h1>Alterar senha</h1>
 
-    <form action="{{route('users.updatepass', $user->id) }}" method="POST" class="form-create" >
+    <form action="{{route('users.editpass', $user->id) }}" method="POST" class="form-create" >
         @csrf
         @method('PUT')
         <label for="current_pass">Senha atual:</label>
