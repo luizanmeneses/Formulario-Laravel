@@ -97,7 +97,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     $user->password = Hash::make($request->new_pass);
     $user->save();
 
-    return redirect()->route('users.index')->with('success', 'Senha atualizada')
+    return redirect()->route('users.index')->with('success', 'Senha atualizada');
     }
 
     //Delete:
