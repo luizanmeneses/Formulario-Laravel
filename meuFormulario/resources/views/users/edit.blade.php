@@ -4,7 +4,7 @@
     @if($user)
     <form action="{{route('users.update', $user->id) }}" method="POST" class="form-create" >
         @csrf
-        @method('PUT')
+        @method('PACTH')
         <label for="name">Nome:</label>
         <input type="text" name="name" id="name" value="{{$user->name}}" required>
         @error('name')

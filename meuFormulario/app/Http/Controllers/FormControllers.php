@@ -87,7 +87,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     public function updatepass(Request $request, $id){
         request() -> validate([
             'current_pass' => 'required',
-            'new_pass' => 'required|min:3|confirmed',
+            'new_pass' => 'required|min:3',
         ]);
     $user = User::findOrFail($id);
 
@@ -97,7 +97,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     $user->password = Hash::make($request->new_pass);
     $user->save();
 
-    return redirect()->route('users.index')->with('success', 'Senha atualizada');
+    return redirect()->route('users.show',$id)->with('success', 'Senha atualizada');
     }
 
     //Delete:
