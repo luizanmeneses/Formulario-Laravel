@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 
 //Criar Formulário:
 class FormControllers extends Controller//ou seja, as funções do Controller se estendem para a classe que criamos
@@ -65,11 +66,38 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
         $user->email = $request->email;
 
     if ($request->filled('password')){
-        $user->password = bcrypt($request->password);//Facade - Hash *Yuri*
+        $user->password = Hash::make($request->password);//Facade - Hash forma mais recomendada e segura de criptografar a senha
+                                                         //antes de colocar na BD.
     }
     $user->save();
         return redirect()->route('users.index')->with('success', 'Cadastro Atualizado :)');
 
+    }
+
+    //Atualizar senha:
+    public function editpass($id){
+        $user = User:: findOrFail($id);
+        if(!$user) {
+            return redirect()->route('users.index')->with('success', 'Senha atualizada.');
+        }
+        return view('user.edit', compact('user'));
+    }
+
+    //Update senha:
+    public function updatepass(Request $request, $id){
+        request() -> validate([
+            'current_pass' => 'required',
+            'new_pass' => 'required|min:3|confirmed',
+        ]);
+    $user = User::findOrFail($id);
+
+    if (!Hash::check($request->current_pass, $user->password)){
+        return back()->withErrors(['current_pass' => 'Senha atual incorreta']);
+    }
+    $user->password = Hash::make($request->new_pass);
+    $user->save();
+
+    return redirect()->route('users.index')->with('success', 'Senha atualizada')
     }
 
     //Delete:
@@ -89,5 +117,14 @@ No método update, estamos usando nullable na senha para que ela não seja obrig
 public function index() {
         $users = User:: all();//Busca todos os registros da tabela Users e armazena nessa var users.
             return view('users.index')->with('users',$users);//carrega a view index e passa os valores de $users pra ela
+    }
+
+Outra forma de criptografar a senha, mas é menos recomendada:
+    if ($request->filled('password')){
+        $user->password = bcrypt($request->password);//Facade - Hash *Yuri*
+    }
+    $user->save();
+        return redirect()->route('users.index')->with('success', 'Cadastro Atualizado :)');
+
     }
 */
