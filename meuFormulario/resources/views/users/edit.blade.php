@@ -4,7 +4,7 @@
     @if($user)
     <form action="{{route('users.update', $user->id) }}" method="POST" class="form-create" >
         @csrf
-        @method('PUT')
+        @method('PACTH')
         <label for="name">Nome:</label>
         <input type="text" name="name" id="name" value="{{$user->name}}" required>
         @error('name')
@@ -18,7 +18,9 @@
         @enderror
 
         <button type="submit" class="button-create">Atualizar</button>
-        <a href="{{route('users.show', $user->id)}}" class="custom-link">Cancelar</a>
+        <a href="{{route('users.show', $user->id)}}" class="custom-link">Cancelar</a><br><br>
+        
+        <a href="{{route('users.editpass', $user->id)}}">Alterar senha</a>
     </form>
     @else
         <p>Usuário não encontrado.</p>
