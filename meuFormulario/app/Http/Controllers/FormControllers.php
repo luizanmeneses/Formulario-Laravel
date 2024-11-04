@@ -14,8 +14,8 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
         return view('users.create');
         
     }
+    
     //Validar e Armazenar os dados do Formulário:
-
     public function store(Request $request) {
             request() -> validate([
                 'name' => ['required','min:4'],
@@ -26,7 +26,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = $request->input('password');
+            $user->password = Hash::make($request->password);
             $user->save();
             
         //3. Redirecionar para a página de lista de usuários:
@@ -36,8 +36,8 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     //Listar os Usuários cadastrados:
     public function index() {
         $users = User:: all();//Busca todos os registros da tabela Users e armazena nessa var users.
-            return view('users.index', compact('users'))->with('users',$users);//carrega a view index e passa os valores de $users pra ela
-    }
+            return view('users.index', compact('users'));//carrega a view index e passa os valores de $users pra ela
+    }                                //->with('users',$users) - poderia usar essa expressão tbm ao invés do compact.
     //Ver o usuário selecionado:
     public function show($id) {
         $user = User:: find($id);//Busca todos os registros da tabela Users e armazena nessa var users.

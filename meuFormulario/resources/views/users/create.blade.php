@@ -5,6 +5,7 @@
    
     <h1>Insira seus dados para o cadastro:</h1>
     <form action="{{route('users.store')}}" method="post" class="form-create">
+        <!-- Envia p/ a rota store p/ que os dados sejam validados e depois salvos no BD -->
         @csrf
         <label for="name">Nome:</label><br>
         <input type="text" name="name" id="name" value="{{old('name')}}" required><br>
