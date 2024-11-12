@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreValidation;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 //Criar Formulário:
 class FormControllers extends Controller//ou seja, as funções do Controller se estendem para a classe que criamos
@@ -16,17 +19,16 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     }
     //Validar e Armazenar os dados do Formulário:
 
-    public function store(Request $request) {
-            request() -> validate([
-                'name' => ['required','min:4'],
-                'email' => ['required','unique:users'],
-                'password' => ['required','min:3']
-            ]);
+    public function store(StoreValidation $request): RedirectResponse //o Request de antes é substituido pelo Form Request
+                                                    
+    {
+        $validated = $request->validated();//retorna os dados que foram validados
 
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = $request->input('password');
+            $user->password = Hash::make($request->password);
+            //$user->password = $request->input('password');
             $user->save();
             
         //3. Redirecionar para a página de lista de usuários:
@@ -128,4 +130,22 @@ Outra forma de criptografar a senha, mas é menos recomendada:
         return redirect()->route('users.index')->with('success', 'Cadastro Atualizado :)');
 
     }
+
+    Store antes de colocar a validação no Form Request:
+    public function store(Request $request) {
+            request() -> validate([
+                'name' => ['required','min:4'],
+                'email' => ['required','unique:users'],
+                'password' => ['required','min:3']
+            ]);
+
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
+            $user->save();
+            
+        //3. Redirecionar para a página de lista de usuários:
+        return redirect()->route('users.index')->with('success', 'Cadastro Realizado :)');
+}
 */
