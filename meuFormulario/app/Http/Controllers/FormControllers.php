@@ -59,7 +59,6 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     //Update - para atualizar os usuários no BD:
     public function update(UpdateValidation $request, $id)
     {
-        //$validate = $request->validate();
 
         $user = User:: findOrFail($id);
         $user->name = $request->name;
