@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreValidation;
+use App\Http\Requests\UpdateValidation;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     public function store(StoreValidation $request): RedirectResponse //o Request de antes é substituido pelo Form Request
                                                     
     {
-        $validated = $request->validated();//retorna os dados que foram validados
+        //$validated = $request->validated();//retorna os dados que foram validados
 
             $user = new User();
             $user->name = $request->input('name');
@@ -56,12 +57,9 @@ class FormControllers extends Controller//ou seja, as funções do Controller se
     }
 
     //Update - para atualizar os usuários no BD:
-    public function update(Request $request, $id){
-        request() -> validate([
-            'name' => ['required','min:4'],
-            'email' => ['required','unique:users,email'.$id],//email deve ser único na tabela, mas ignorando o registro desse
-                                                            //id, assim se consegue atualizar sem conflito. 
-        ]);
+    public function update(UpdateValidation $request, $id)
+    {
+        //$validate = $request->validate();
 
         $user = User:: findOrFail($id);
         $user->name = $request->name;

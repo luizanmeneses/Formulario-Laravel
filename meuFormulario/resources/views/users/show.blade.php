@@ -1,7 +1,7 @@
 <x-layout title="Ver separadamente">
     <h1>Detalhes Usuário Selecionado</h1>
     <p><strong>ID: </strong>{{ $user->id }} -- <strong>Nome: </strong>{{ $user->name }} -- 
-        <strong>Email: </strong>{{ $user->email }}
+        <strong>E-mail: </strong>{{ $user->email }}
     </p>
     
     <a href="{{ route('users.edit', $user->id) }}" class="button-show">Editar</a>
